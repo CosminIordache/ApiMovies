@@ -1,11 +1,12 @@
-package com.example.apimovies
+package com.example.apimovies.ui.view
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.apimovies.Model.Movie
+import com.example.apimovies.R
+import com.example.apimovies.model.Movie
 import com.example.apimovies.databinding.CardMovieBinding
 import com.squareup.picasso.Picasso
 

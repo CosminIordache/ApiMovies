@@ -1,20 +1,17 @@
-package com.example.apimovies.View
+package com.example.apimovies.ui.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.apimovies.ApiService
-import com.example.apimovies.Model.Movie
-import com.example.apimovies.MoviesAdapter
-import com.example.apimovies.Util
+import com.example.apimovies.data.ApiService
+import com.example.apimovies.model.Movie
+import com.example.apimovies.data.Util
 import com.example.apimovies.databinding.ActivityMainBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -47,9 +44,11 @@ class MainActivity : AppCompatActivity() {
 
 
         screenSplash.setKeepOnScreenCondition { isLoading }
+        lifecycleScope.launch {
+            initRecycleView()
+            getMoviesAPI()
+        }
 
-        initRecycleView()
-        getMoviesAPI()
 
     }
 
@@ -88,12 +87,13 @@ class MainActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
-    private fun getMoviesAPI() {
-        CoroutineScope(Dispatchers.IO).launch {
-            delay(1000)
+    private suspend fun getMoviesAPI() {
+        //CoroutineScope(Dispatchers.IO).launch {
+
             val call = getRetrofit().create(ApiService::class.java)
                 .getMovies(key = "9fbea8d0a3e8c5d1ab5573cb33b9282c", leng = "en-US")
-            runOnUiThread {
+
+            withContext(Dispatchers.Main) {
                 if (call.isSuccessful) {
                     // showRecycleView
                     val movies = call.body()
@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, "Error", Toast.LENGTH_SHORT).show()
                 }
             }
-        }
+        //}
     }
 
 }

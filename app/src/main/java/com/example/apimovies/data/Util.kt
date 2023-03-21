@@ -1,4 +1,4 @@
-package com.example.apimovies
+package com.example.apimovies.data
 
 object Util {
     val baseUrlImage = "https://image.tmdb.org/t/p/w500"

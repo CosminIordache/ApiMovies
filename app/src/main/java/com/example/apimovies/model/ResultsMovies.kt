@@ -1,6 +1,4 @@
-package com.example.apimovies.Model
-
-import com.example.apimovies.Model.Result
+package com.example.apimovies.model
 
 data class ResultsMovies(
     val page: Int,

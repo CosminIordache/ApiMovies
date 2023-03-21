@@ -1,6 +1,6 @@
-package com.example.apimovies
+package com.example.apimovies.data
 
-import com.example.apimovies.Model.ResultsMovies
+import com.example.apimovies.model.ResultsMovies
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

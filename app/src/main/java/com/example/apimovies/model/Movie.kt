@@ -1,4 +1,4 @@
-package com.example.apimovies.Model
+package com.example.apimovies.model
 
 data class Movie(
     var image : String,
