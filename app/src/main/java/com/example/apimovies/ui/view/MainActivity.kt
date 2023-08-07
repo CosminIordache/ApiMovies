@@ -141,13 +141,10 @@ class MainActivity : AppCompatActivity() {
         switchView.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 enableDarkMode()
-                switchView.isChecked = true
             } else {
                 disableDarkMode()
-                switchView.isChecked = false
             }
         }
-
         return true
     }
 
